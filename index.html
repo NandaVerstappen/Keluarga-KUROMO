@@ -6,63 +6,138 @@
   <title>Keluarga KUROMO</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #f8f8f8, #ffffff);
-      color: #333;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
+      background: #fdfdfd;
+      color: #2c3e50;
     }
+
     header {
-      background: #2c3e50;
+      background: linear-gradient(135deg, #1abc9c, #16a085);
       color: white;
-      padding: 25px 10px;
+      padding: 50px 20px;
       text-align: center;
-      border-bottom: 4px solid #16a085;
     }
+
     header h1 {
       margin: 0;
-      font-size: 32px;
+      font-size: 42px;
     }
+
     header p {
-      margin: 5px 0 0;
-      font-style: italic;
-      color: #bdc3c7;
+      margin-top: 10px;
+      font-size: 18px;
+      color: #ecf0f1;
     }
+
     nav {
-      background: #16a085;
-      text-align: center;
-      padding: 10px;
+      background: #2c3e50;
+      display: flex;
+      justify-content: center;
+      padding: 12px 0;
     }
+
     nav a {
       color: white;
       text-decoration: none;
       margin: 0 15px;
       font-weight: bold;
+      transition: 0.3s;
     }
+
     nav a:hover {
-      text-decoration: underline;
+      color: #1abc9c;
     }
+
     section {
-      padding: 40px 20px;
-      max-width: 900px;
+      padding: 60px 20px;
+      max-width: 1000px;
       margin: auto;
     }
+
+    h2 {
+      text-align: center;
+      color: #16a085;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
+
     .gallery img {
       width: 100%;
-      border-radius: 15px;
+      border-radius: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+
+    .profiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin: 10px 0;
+      color: #2c3e50;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 15px;
+    }
+
+    .contact {
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .contact a {
+      display: inline-block;
+      background: #1abc9c;
+      color: white;
+      text-decoration: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    .contact a:hover {
+      background: #16a085;
+    }
+
     footer {
       background: #2c3e50;
       color: white;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 25px 10px;
+      margin-top: 60px;
       font-size: 14px;
     }
   </style>
@@ -71,11 +146,12 @@
 
   <header>
     <h1>Keluarga Besar KUROMO</h1>
-    <p>Tempat berkumpul, berbagi cerita, dan menjaga silaturahmi 💖</p>
+    <p>Tempat berbagi kenangan, cerita, dan kehangatan keluarga 💖</p>
   </header>
 
   <nav>
     <a href="#beranda">Beranda</a>
+    <a href="#profil">Profil</a>
     <a href="#galeri">Galeri</a>
     <a href="#riwayat">Riwayat</a>
     <a href="#kontak">Kontak</a>
@@ -83,41 +159,66 @@
 
   <section id="beranda">
     <h2>🏠 Beranda</h2>
-    <p>
+    <p style="text-align:center;">
       Selamat datang di website resmi <strong>Keluarga KUROMO</strong>.  
-      Kami adalah keluarga besar yang menjunjung tinggi nilai kekeluargaan, kebersamaan, dan saling mendukung satu sama lain.
+      Kami adalah keluarga besar yang hidup dengan semangat persaudaraan, kebersamaan, dan saling mendukung dalam suka maupun duka.
     </p>
+  </section>
+
+  <section id="profil">
+    <h2>👨‍👩‍👧 Profil Keluarga</h2>
+    <div class="profiles">
+      <div class="card">
+        <img src="https://i.imgur.com/7yUvePI.jpeg" alt="Ayah">
+        <h3>Ayah KUROMO</h3>
+        <p>Pemimpin keluarga, bijaksana dan penyayang. Menjadi panutan bagi semua anggota keluarga.</p>
+      </div>
+      <div class="card">
+        <img src="https://i.imgur.com/r1b2M7O.jpeg" alt="Ibu">
+        <h3>Ibu KUROMO</h3>
+        <p>Wanita kuat dan penyayang, sumber kehangatan dan kekompakan keluarga KUROMO.</p>
+      </div>
+      <div class="card">
+        <img src="https://i.imgur.com/FiU8wFx.jpeg" alt="Anak">
+        <h3>Nanda KUROMO</h3>
+        <p>Anak cerdas dan penuh semangat, selalu membawa keceriaan dalam keluarga.</p>
+      </div>
+    </div>
   </section>
 
   <section id="galeri">
     <h2>📷 Galeri Keluarga</h2>
     <div class="gallery">
-      <img src="https://i.imgur.com/VNwzY1E.png" alt="Foto 1">
-      <img src="https://i.imgur.com/3U9Kxdp.jpeg" alt="Foto 2">
-      <img src="https://i.imgur.com/XA7p4HL.jpeg" alt="Foto 3">
-      <img src="https://i.imgur.com/6iLx7wL.jpeg" alt="Foto 4">
+      <img src="https://i.imgur.com/VNwzY1E.png" alt="Foto keluarga 1">
+      <img src="https://i.imgur.com/6iLx7wL.jpeg" alt="Foto keluarga 2">
+      <img src="https://i.imgur.com/3U9Kxdp.jpeg" alt="Foto keluarga 3">
+      <img src="https://i.imgur.com/XA7p4HL.jpeg" alt="Foto keluarga 4">
+      <img src="https://i.imgur.com/WaOa0vd.jpeg" alt="Foto keluarga 5">
+      <img src="https://i.imgur.com/szKDgEt.jpeg" alt="Foto keluarga 6">
     </div>
   </section>
 
   <section id="riwayat">
     <h2>📜 Riwayat Keluarga</h2>
-    <p>
-      Keluarga KUROMO berdiri sejak beberapa generasi lalu dan terus berkembang menjadi keluarga besar yang penuh kasih dan semangat.
-      Nama “KUROMO” berasal dari gabungan nama keluarga leluhur kami yang menjadi simbol persatuan dan keteguhan hati.
+    <p style="text-align:center;">
+      Keluarga KUROMO berasal dari generasi yang menjunjung tinggi nilai saling menghargai, gotong royong, dan cinta kasih.  
+      Sejak awal berdiri, keluarga ini telah tumbuh menjadi keluarga besar yang selalu menjaga silaturahmi di mana pun berada.  
+      Kami percaya bahwa kebahagiaan sejati berawal dari keluarga yang solid dan penuh cinta.
     </p>
   </section>
 
   <section id="kontak">
     <h2>📞 Kontak Keluarga</h2>
-    <p>Hubungi kami untuk silaturahmi atau acara keluarga:</p>
-    <ul>
-      <li>Email: <a href="mailto:keluarga.kuromo@gmail.com">keluarga.kuromo@gmail.com</a></li>
-      <li>WhatsApp: <a href="https://wa.me/6287854925097">+62 878-5492-5097</a></li>
-      <li>Alamat: Jl. Bahagia No. 27, Indonesia</li>
- IndonesiA  </section>
+    <div class="contact">
+      <p>Hubungi kami untuk silaturahmi, acara, atau sekadar menyapa 😊</p>
+      <a href="https://wa.me/NOMOR_KAMU_DI_SINI" target="_blank">💬 WhatsApp</a>
+      <a href="mailto:keluarga.kuromo@gmail.com">✉️ Email</a>
+      <a href="https://maps.google.com" target="_blank">📍 Lokasi</a>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 Keluarga KUROMO — Semua hak dilindungi.</p>
+    <p>© 2025 Keluarga KUROMO — Dibuat dengan ❤️ oleh Nanda Awaludin.</p>
   </footer>
 
 </body>
