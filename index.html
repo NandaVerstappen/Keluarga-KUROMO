@@ -3,223 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keluarga KUROMO</title>
+  <title>Keluarga Besar KUROMO</title>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background: #fdfdfd;
-      color: #2c3e50;
-    }
-
-    header {
-      background: linear-gradient(135deg, #1abc9c, #16a085);
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 42px;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #ecf0f1;
-    }
-
-    nav {
-      background: #2c3e50;
-      display: flex;
-      justify-content: center;
-      padding: 12px 0;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #1abc9c;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #16a085;
-      font-size: 28px;
-      margin-bottom: 30px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .profiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-
-    .card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      margin: 10px 0;
-      color: #2c3e50;
-    }
-
-    .card p {
-      color: #555;
-      font-size: 15px;
-    }
-
-    .contact {
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: #1abc9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 25px;
-      border-radius: 10px;
-      margin: 5px;
-      transition: 0.3s;
-    }
-
-    .contact a:hover {
-      background: #16a085;
-    }
-
-    footer {
-      background: #2c3e50;
-      color: white;
-      text-align: center;
-      padding: 25px 10px;
-      margin-top: 60px;
-      font-size: 14px;
-    }
+    body { margin:0; font-family: 'Poppins', sans-serif; background-color:#0f0f0f; color:#f0f0f0; scroll-behavior: smooth; }
+    header { background:#1a1a1a; padding:30px; text-align:center; border-bottom:1px solid #333; }
+    header h1 { color:#a2d2ff; margin:0; font-size:2.5em; }
+    header p { color:#ccc; font-size:1.2em; }
+    nav { position:sticky; top:0; background:#141414; display:flex; justify-content:center; padding:10px 0; border-bottom:1px solid #222; z-index:10; }
+    nav a { color:#a2d2ff; text-decoration:none; margin:0 20px; font-weight:500; transition:color 0.3s; }
+    nav a:hover { color:#ffffff; }
+    section { padding:60px 20px; max-width:1000px; margin:auto; }
+    h2 { color:#a2d2ff; border-left:4px solid #a2d2ff; padding-left:10px; }
+    .timeline { position:relative; margin-top:40px; }
+    .timeline::after { content:''; position:absolute; left:50%; width:2px; background:#a2d2ff; top:0; bottom:0; transform:translateX(-50%); }
+    .entry { padding:20px 40px; position:relative; width:50%; }
+    .entry.left { left:0; }
+    .entry.right { left:50%; }
+    .entry::after { content:''; position:absolute; width:20px; height:20px; background:#a2d2ff; border-radius:50%; top:20px; right:-10px; }
+    .entry.right::after { left:-10px; right:auto; }
+    .entry h3 { margin-top:0; color:#fff; }
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; margin-top:20px; }
+    .gallery img { width:100%; border-radius:10px; border:1px solid #333; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s; }
+    .gallery img:hover { transform:scale(1.05); box-shadow:0 0 10px #a2d2ff; }
+    footer { text-align:center; padding:20px; border-top:1px solid #333; color:#aaa; font-size:0.9em; background:#111; }
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; }
+    .modal img { max-width:90%; max-height:90%; border-radius:10px; }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Keluarga Besar KUROMO</h1>
-    <p>Tempat berbagi kenangan, cerita, dan kehangatan keluarga 💖</p>
+    <p>Dari Kakek & Nenek hingga Anak-Cucu • Bersatu dalam cinta</p>
   </header>
-
   <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#profil">Profil</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#silsilah">Silsilah</a>
     <a href="#galeri">Galeri</a>
-    <a href="#riwayat">Riwayat</a>
     <a href="#kontak">Kontak</a>
   </nav>
-
-  <section id="beranda">
-    <h2>🏠 Beranda</h2>
-    <p style="text-align:center;">
-      Selamat datang di website resmi <strong>Keluarga KUROMO</strong>.  
-      Kami adalah keluarga besar yang hidup dengan semangat persaudaraan, kebersamaan, dan saling mendukung dalam suka maupun duka.
-    </p>
+  <section id="tentang">
+    <h2>Tentang Keluarga</h2>
+    <p>Keluarga KUROMO adalah keluarga besar yang hangat dan penuh cerita. Web ini dibuat untuk menyimpan kenangan, foto, dan kisah dari tiap generasi.</p>
   </section>
-
-  <section id="profil">
-    <h2>👨‍👩‍👧 Profil Keluarga</h2>
-    <div class="profiles">
-      <div class="card">
-        <img src="https://i.imgur.com/7yUvePI.jpeg" alt="Ayah">
-        <h3>Ayah KUROMO</h3>
-        <p>Pemimpin keluarga, bijaksana dan penyayang. Menjadi panutan bagi semua anggota keluarga.</p>
-      </div>
-      <div class="card">
-        <img src="https://i.imgur.com/r1b2M7O.jpeg" alt="Ibu">
-        <h3>Ibu KUROMO</h3>
-        <p>Wanita kuat dan penyayang, sumber kehangatan dan kekompakan keluarga KUROMO.</p>
-      </div>
-      <div class="card">
-        <img src="https://i.imgur.com/FiU8wFx.jpeg" alt="Anak">
-        <h3>Nanda KUROMO</h3>
-        <p>Anak cerdas dan penuh semangat, selalu membawa keceriaan dalam keluarga.</p>
-      </div>
+  <section id="silsilah">
+    <h2>Silsilah Keluarga</h2>
+    <div class="timeline">
+      <div class="entry left"><h3>Kakek & Nenek</h3><p>Pemimpin keluarga yang bijaksana.</p></div>
+      <div class="entry right"><h3>Orang Tua</h3><p>Anak-anak dari kakek & nenek, generasi kedua.</p></div>
+      <div class="entry left"><h3>Anak-Cucu</h3><p>Generasi muda yang penuh semangat dan cerita baru.</p></div>
     </div>
   </section>
-
   <section id="galeri">
-    <h2>📷 Galeri Keluarga</h2>
+    <h2>Galeri Keluarga</h2>
     <div class="gallery">
-      <img src="https://i.imgur.com/VNwzY1E.png" alt="Foto keluarga 1">
-      <img src="https://i.imgur.com/6iLx7wL.jpeg" alt="Foto keluarga 2">
-      <img src="https://i.imgur.com/3U9Kxdp.jpeg" alt="Foto keluarga 3">
-      <img src="https://i.imgur.com/XA7p4HL.jpeg" alt="Foto keluarga 4">
-      <img src="https://i.imgur.com/WaOa0vd.jpeg" alt="Foto keluarga 5">
-      <img src="https://i.imgur.com/szKDgEt.jpeg" alt="Foto keluarga 6">
+      <img src="https://placekitten.com/300/200" alt="Foto 1" onclick="openModal(this.src)">
+      <img src="https://placekitten.com/301/200" alt="Foto 2" onclick="openModal(this.src)">
+      <img src="https://placekitten.com/302/200" alt="Foto 3" onclick="openModal(this.src)">
+      <img src="https://placekitten.com/303/200" alt="Foto 4" onclick="openModal(this.src)">
     </div>
   </section>
-
-  <section id="riwayat">
-    <h2>📜 Riwayat Keluarga</h2>
-    <p style="text-align:center;">
-      Keluarga KUROMO berasal dari generasi yang menjunjung tinggi nilai saling menghargai, gotong royong, dan cinta kasih.  
-      Sejak awal berdiri, keluarga ini telah tumbuh menjadi keluarga besar yang selalu menjaga silaturahmi di mana pun berada.  
-      Kami percaya bahwa kebahagiaan sejati berawal dari keluarga yang solid dan penuh cinta.
-    </p>
-  </section>
-
   <section id="kontak">
-    <h2>📞 Kontak Keluarga</h2>
-    <div class="contact">
-      <p>Hubungi kami untuk silaturahmi, acara, atau sekadar menyapa 😊</p>
-      <a href="https://wa.me/NOMOR_KAMU_DI_SINI" target="_blank">💬 WhatsApp</a>
-      <a href="mailto:keluarga.kuromo@gmail.com">✉️ Email</a>
-      <a href="https://maps.google.com" target="_blank">📍 Lokasi</a>
-    </div>
+    <h2>Kontak</h2>
+    <p>Email: <a href="mailto:keluargakuromo@gmail.com">keluargakuromo@gmail.com</a></p>
   </section>
-
   <footer>
-    <p>© 2025 Keluarga KUROMO — Dibuat dengan ❤️ oleh Nanda Awaludin.</p>
+    <p>© 2025 Keluarga KUROMO. Dibuat dengan ❤️ oleh Nanda Verstappen.</p>
   </footer>
 
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img id="modal-img">
+  </div>
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    function openModal(src){ modal.style.display='flex'; modalImg.src=src; }
+    function closeModal(){ modal.style.display='none'; }
+  </script>
 </body>
 </html>
