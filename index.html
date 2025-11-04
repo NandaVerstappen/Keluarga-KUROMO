@@ -1,241 +1,614 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keluarga KUROMO</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KPN KOTEK — Kenangan Sirkel</title>
+
+  <!-- Google Font (opsional, bisa dipakai offline kalau dihost sendiri) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background: #fdfdfd;
-      color: #2c3e50;
+    :root{
+      --bg:#fffaf6;
+      --panel:#ffffff;
+      --muted:#6b6b78;
+      --accent1:#9b59ff;   /* ungu lembut */
+      --accent2:#ff9aa2;   /* pink pastel */
+      --accent3:#ffd27f;   /* kuning lembut */
+      --shadow: 0 6px 18px rgba(15,15,30,0.08);
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, #fffaf6 0%, #f7fbff 100%);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:100px; /* space for footer / music bar */
     }
 
-    header {
-      background: linear-gradient(135deg, #1abc9c, #16a085);
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
+    /* Header */
+    .site-header{
+      max-width:1100px;
+      margin:30px auto 10px;
+      padding:22px;
+      border-radius:var(--radius);
+      display:flex;
+      gap:18px;
+      align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.75));
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+    .logo{
+      width:92px;height:92px;border-radius:18px;
+      background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:800;font-size:20px;
+      box-shadow: 0 8px 20px rgba(155,89,255,0.18), inset 0 -6px 12px rgba(255,255,255,0.05);
+    }
+    .site-title h1{margin:0;font-size:22px;color:#3b2f5a}
+    .site-title p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    /* navigation */
+    nav.topnav{
+      max-width:1100px;margin:12px auto;padding:0 6px;display:flex;gap:8px;align-items:center;
+      justify-content:center;flex-wrap:wrap;
+    }
+    nav.topnav a{
+      text-decoration:none;padding:10px 14px;border-radius:12px;color:#3b2f5a;
+      background:transparent;font-weight:600;border:1px solid rgba(60,40,90,0.04);
+      transition:all .18s;
+    }
+    nav.topnav a:hover{transform:translateY(-3px);box-shadow:var(--shadow);}
+
+    /* layout main */
+    .container{max-width:1100px;margin:18px auto;padding:18px;display:grid;grid-template-columns:1fr 360px;gap:18px;}
+    @media(max-width:980px){ .container{grid-template-columns:1fr; padding:12px} }
+
+    /* main column panels */
+    .card{
+      background:var(--panel);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      margin-bottom:16px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 42px;
+    /* member cards */
+    .members{display:flex;gap:12px;flex-wrap:wrap}
+    .member{
+      flex:1 1 170px; min-width:150px; max-width:240px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .member .avatar{
+      width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent1));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:800;
+    }
+    .member h4{margin:0;font-size:16px}
+    .member p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    /* timeline */
+    .timeline{position:relative;margin-top:8px;padding-left:12px}
+    .timeline::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent1),var(--accent2));opacity:0.2}
+    .event{margin:14px 0;padding-left:24px;position:relative}
+    .event::before{content:"";position:absolute;left:-6px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent1);box-shadow:0 6px 18px rgba(155,89,255,0.12)}
+    .event h4{margin:0;font-size:15px}
+    .event p{margin:6px 0 0;color:var(--muted);font-size:14px}
+
+    /* gallery */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+    .gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:10px;cursor:pointer;border:4px solid rgba(255,255,255,0.6);box-shadow:0 6px 18px rgba(0,0,0,0.06);transition:transform .18s,box-shadow .18s}
+    .gallery-grid img:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,0.12)}
+
+    /* story / profile */
+    .profile{display:flex;gap:12px;align-items:flex-start}
+    .profile .big-avatar{width:120px;height:120px;border-radius:18px;background:linear-gradient(135deg,var(--accent3),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:800}
+    .profile .bio{flex:1}
+
+    /* guestbook */
+    .guest-list{max-height:300px;overflow:auto;padding-right:8px}
+    .guest-item{border-radius:10px;padding:10px;margin-bottom:8px;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.85));box-shadow:var(--shadow)}
+    .guest-item small{color:var(--muted)}
+
+    /* right column widgets */
+    .side{
+      display:flex;flex-direction:column;gap:12px;position:sticky;top:18px;
     }
 
-    header p {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #ecf0f1;
+    /* music player bar (sticky bottom for small devices, or small floating control) */
+    .music-control{
+      position:fixed;left:18px;right:18px;bottom:18px;margin:auto;max-width:1100px;
+      display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,0.95),rgba(255,255,255,0.9));
+      box-shadow:0 18px 40px rgba(16,16,40,0.12);z-index:999;
     }
+    .music-left{display:flex;gap:12px;align-items:center}
+    .play-btn{width:48px;height:48px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:white;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(155,89,255,0.18)}
+    .progress{flex:1;display:flex;flex-direction:column;gap:6px}
+    .progress .bar{height:8px;background:linear-gradient(90deg,#eee,#fff);border-radius:10px;overflow:hidden}
+    .progress .bar > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent1));border-radius:10px}
+    .time{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+    .vol{display:flex;gap:8px;align-items:center}
+    .vol input[type="range"]{width:96px}
 
-    nav {
-      background: #2c3e50;
-      display: flex;
-      justify-content: center;
-      padding: 12px 0;
+    /* modal for image zoom */
+    .modal{
+      position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(12,12,20,0.75);display:none;align-items:center;justify-content:center;z-index:2000;
     }
+    .modal img{max-width:92%;max-height:92%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #1abc9c;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      color: #16a085;
-      font-size: 28px;
-      margin-bottom: 30px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .profiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    }
-
-    .card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-    }
-
-    .card h3 {
-      margin: 10px 0;
-      color: #2c3e50;
-    }
-
-    .card p {
-      color: #555;
-      font-size: 15px;
-    }
-
-    .contact {
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .contact a {
-      display: inline-block;
-      background: #1abc9c;
-      color: white;
-      text-decoration: none;
-      padding: 10px 25px;
-      border-radius: 10px;
-      margin: 5px;
-      transition: 0.3s;
-    }
-
-    .contact a:hover {
-      background: #16a085;
-    }
-
-    footer {
-      background: #2c3e50;
-      color: white;
-      text-align: center;
-      padding: 25px 10px;
-      margin-top: 60px;
-      font-size: 14px;
-    }
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent3),var(--accent2));color:#3b2f5a;font-weight:700;cursor:pointer}
+    footer.site-footer{text-align:center;padding:28px 10px;color:var(--muted);font-size:13px;margin-top:28px}
   </style>
 </head>
-<body>
 
-  <header>
-    <h1>Keluarga Besar KUROMO</h1>
-    <p>Tempat berbagi kenangan, cerita, dan kehangatan keluarga 💖</p>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">K●K</div>
+    <div class="site-title">
+      <h1>KPN KOTEK</h1>
+      <p>Sirkel kenangan — PALEN • KEPET • NANDUT — tempat nyimpen cerita, foto, & pesan.</p>
+    </div>
+    <div style="margin-left:auto" class="muted">2025 • Kenangan kita</div>
   </header>
 
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#profil">Profil</a>
-    <a href="#galeri">Galeri</a>
-    <a href="#riwayat">Riwayat</a>
-    <a href="#kontak">Kontak</a>
+  <!-- nav -->
+  <nav class="topnav" aria-label="Main Navigation">
+    <a href="#home">Beranda</a>
+    <a href="#members">Anggota</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#guestbook">Pesan</a>
+    <a href="#about">Tentang</a>
   </nav>
 
-  <section id="beranda">
-    <h2>🏠 Beranda</h2>
-    <p style="text-align:center;">
-      Selamat datang di website resmi <strong>Keluarga KUROMO</strong>.  
-      Kami adalah keluarga besar yang hidup dengan semangat persaudaraan, kebersamaan, dan saling mendukung dalam suka maupun duka.
-    </p>
-  </section>
+  <!-- CONTENT -->
+  <main class="container">
+    <div>
 
-  <section id="profil">
-    <h2>👨‍👩‍👧 Profil Keluarga</h2>
-    <section>
-    <div class="card">
-        <h1>👨‍👩‍👧 KAKEK/NENEK</h1>
+      <!-- Hero / Intro -->
+      <section id="home" class="card" style="display:flex;align-items:center;gap:18px">
+        <div style="flex:1">
+          <h2 style="margin:0 0 8px;color:#4b2b5f">Halo KPN KOTEK — Kenangan Kita</h2>
+          <p class="muted" style="margin:0 0 12px">Selamat datang di ruang kenangan: simpan foto, cerita, dan pesan untuk PALEN, KEPET, NANDUT. Klik tombol musik bawah untuk mulai dengarkan cuplikan favorit kita.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" onclick="scrollToId('gallery')">Lihat Galeri</button>
+            <button class="btn" onclick="scrollToId('guestbook')">Tulis Pesan</button>
+          </div>
+        </div>
+        <div style="width:220px">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=975b325de2a3a6a5f6a9f9f0d7f2e7fb" alt="hero" style="width:100%;border-radius:12px;box-shadow:var(--shadow)">
+        </div>
+      </section>
+
+      <!-- Members -->
+      <section id="members" class="card">
+        <h3>Anggota Utama</h3>
+        <div class="members" style="margin-top:12px">
+          <div class="member">
+            <div class="avatar">P</div>
+            <div>
+              <h4>PALEN</h4>
+              <p class="muted">Nama panggilan — si lucu & drama queen grup</p>
+              <div style="margin-top:8px">
+                <button class="btn" onclick="openProfile('PALEN')">Lihat Cerita</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="member">
+            <div class="avatar">K</div>
+            <div>
+              <h4>KEPET</h4>
+              <p class="muted">Tukang candaan & ahli logistik reuni</p>
+              <div style="margin-top:8px">
+                <button class="btn" onclick="openProfile('KEPET')">Lihat Cerita</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="member">
+            <div class="avatar">N</div>
+            <div>
+              <h4>NANDUT</h4>
+              <p class="muted">Si kreatif & kolektor meme legend</p>
+              <div style="margin-top:8px">
+                <button class="btn" onclick="openProfile('NANDUT')">Lihat Cerita</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section id="timeline" class="card">
+        <h3>Timeline Kenangan</h3>
+        <div class="timeline">
+          <div class="event">
+            <h4>Pertemuan Pertama — 2018</h4>
+            <p class="muted">Ketemu di kantin sekolah, bercanda sampai satpam marah. Awal terbentuknya KPN KOTEK.</p>
+          </div>
+          <div class="event">
+            <h4>Reuni Mini — 2020</h4>
+            <p class="muted">Walau hujan, semangat tetap hangat. Foto grup pertama (yang nanti bakal kamu upload ke galeri).</p>
+          </div>
+          <div class="event">
+            <h4>Roadtrip — 2023</h4>
+            <p class="muted">Trip spontan, nyasar, tapi seru. Lagu favorit 'Teman' jadi soundtrack.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery" class="card">
+        <h3>Galeri Kenangan</h3>
+        <p class="muted">Klik foto untuk memperbesarnya. Ganti URL gambar ke foto kalian di repo nantinya.</p>
+
+        <div class="gallery-grid" style="margin-top:12px">
+          <!-- contoh gambar; ganti src ke file di repo -->
+          <img src="https://placehold.co/600x400/ffd4e0/5b2b5a?text=PALEN+%F0%9F%98%89" alt="paleng" onclick="zoom(this)">
+          <img src="https://placehold.co/600x400/cfe9ff/2b4da3?text=KEPET+%F0%9F%98%8A" alt="kepet" onclick="zoom(this)">
+          <img src="https://placehold.co/600x400/fff7d6/6b4a00?text=NANDUT+%F0%9F%98%9C" alt="nandut" onclick="zoom(this)">
+          <img src="https://placehold.co/600x400/ede7ff/3b2b5a?text=GRUP+%F0%9F%93%8C" alt="grup" onclick="zoom(this)">
+        </div>
+      </section>
+
+      <!-- Story / profile panel (reused) -->
+      <section id="story" class="card" style="display:none" aria-hidden="true">
+        <div class="profile">
+          <div class="big-avatar" id="profile-avatar">P</div>
+          <div class="bio">
+            <h3 id="profile-name">PALEN</h3>
+            <p id="profile-role" class="muted">Nama panggilan</p>
+            <p id="profile-text">Cerita singkat muncul di sini ketika kamu klik "Lihat Cerita".</p>
+            <div style="margin-top:10px">
+              <button class="btn" onclick="closeProfile()">Tutup</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guestbook -->
+      <section id="guestbook" class="card">
+        <h3>Pesan & Kenangan</h3>
+        <p class="muted">Tulis pesanmu untuk sirkel — akan tersimpan di browser supaya tetap aman.</p>
+
+        <form id="guestForm" style="display:flex;flex-direction:column;gap:8px;margin-top:12px" onsubmit="return addGuest()">
+          <input id="gname" type="text" placeholder="Nama (misal: PALEN / KEPET / NANDA)" required style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)">
+          <textarea id="gmsg" placeholder="Tulis pesan kenangan..." rows="4" required style="padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)"></textarea>
+          <div style="display:flex;gap:8px">
+            <button class="btn" type="submit">Kirim Pesan</button>
+            <button type="button" class="btn" onclick="clearGuest()">Hapus Semua</button>
+          </div>
+        </form>
+
+        <div style="margin-top:12px" class="guest-list" id="guestList">
+          <!-- pesan akan dimasukkan di sini -->
+        </div>
+      </section>
+
+      <!-- About / Footer content -->
+      <section id="about" class="card">
+        <h3>Tentang Halaman Ini</h3>
+        <p class="muted">Halaman ini dibuat sebagai tempat kenangan KPN KOTEK. Kamu bisa upload foto dan file audio ke repository GitHub Pages (satu folder), lalu edit kode jika mau ganti teks atau foto. Semua pesan disimpan di browser (localStorage) — hanya bisa dilihat di perangkat yang sama kecuali kamu export pesan manual.</p>
+      </section>
+
     </div>
-    </section>
-    <div class="profiles">
-      <div class="card">
-        <img src="https://i.imgur.com/7yUvePI.jpeg" alt="Kakek">
-        <h3>Sunaryo Utomo</h3>
-        <p>Pemimpin keluarga, bijaksana dan penyayang. Menjadi panutan bagi semua anggota keluarga.</p>
-      </div>
-      <div class="card">
-        <img src="https://i.imgur.com/r1b2M7O.jpeg" alt="Nenek">
-        <h3>Kurotin</h3>
-        <p>Wanita kuat dan penyayang, sumber kehangatan dan kekompakan keluarga KUROMO.</p>
-      </div>
-          <section id="profil">
-    <div class="card">
-        <h1>👨‍👩‍👧 Anak</h1>
-    </div>
-          </section>
-      <div class="card">
-        <img src="https://i.imgur.com/FiU8wFx.jpeg" alt="Anak1">
-        <h3>Erni</h3>
-        <p>Anak cerdas dan penuh semangat, selalu membawa keceriaan dalam keluarga.</p>
-      </div>
-      <div class="card">
-        <img src="https://i.imgur.com/FiU8wFx.jpeg"
-alt="Anak2">
-        <h3>Yuni</h3>
-        <p>Anak cerdas dan penuh semangat, selalu membawa keceriaan dalam keluarga.</p>
-      </div>
-   </div>
-  </section>
 
-  <section id="galeri">
-    <h2>📷 Galeri Keluarga</h2>
-    <div class="gallery">
-      <img src="https://i.imgur.com/VNwzY1E.png" alt="Foto keluarga 1">
-      <img src="https://i.imgur.com/6iLx7wL.jpeg" alt="Foto keluarga 2">
-      <img src="https://i.imgur.com/3U9Kxdp.jpeg" alt="Foto keluarga 3">
-      <img src="https://i.imgur.com/XA7p4HL.jpeg" alt="Foto keluarga 4">
-      <img src="https://i.imgur.com/WaOa0vd.jpeg" alt="Foto keluarga 5">
-      <img src="https://i.imgur.com/szKDgEt.jpeg" alt="Foto keluarga 6">
-    </div>
-  </section>
+    <!-- RIGHT COLUMN -->
+    <aside class="side">
+      <div class="card">
+        <h4>Mini Player</h4>
+        <p class="muted" style="margin:6px 0 12px">Tekan tombol play di bawah (atau tombol besar di bar bawah) untuk memutar cuplikan MP3 yang kamu upload.</p>
 
-  <section id="riwayat">
-    <h2>📜 Riwayat Keluarga</h2>
-    <p style="text-align:center;">
-      Keluarga KUROMO berasal dari generasi yang menjunjung tinggi nilai saling menghargai, gotong royong, dan cinta kasih.  
-      Sejak awal berdiri, keluarga ini telah tumbuh menjadi keluarga besar yang selalu menjaga silaturahmi di mana pun berada.  
-      Kami percaya bahwa kebahagiaan sejati berawal dari keluarga yang solid dan penuh cinta.
-    </p>
-  </section>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="play-btn" id="playBtnTop" title="Play / Pause" onclick="togglePlay()">
+            ▶
+          </button>
+          <div style="flex:1">
+            <div style="font-weight:700" id="trackTitle">Teman — Iwan Fals (cuplikan)</div>
+            <div style="font-size:13px;color:var(--muted);margin-top:6px" id="trackStatus">Stopped</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn" onclick="scrollToId('guestbook')">Tulis Pesan</button>
+        </div>
+      </div>
 
-  <section id="kontak">
-    <h2>📞 Kontak Keluarga</h2>
-    <div class="contact">
-      <p>Hubungi kami untuk silaturahmi, acara, atau sekadar menyapa 😊</p>
-      <a href="https://wa.me/NOMOR_KAMU_DI_SINI" target="_blank">💬 WhatsApp</a>
-      <a href="mailto:keluarga.kuromo@gmail.com">✉️ Email</a>
-      <a href="https://maps.google.com" target="_blank">📍 Lokasi</a>
-    </div>
-  </section>
+      <div class="card">
+        <h4>Quick Links</h4>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <a class="btn" href="#gallery">Galeri</a>
+          <a class="btn" href="#timeline">Timeline</a>
+          <a class="btn" href="#members">Anggota</a>
+        </div>
+      </div>
 
-  <footer>
-    <p>© 2025 Keluarga KUROMO — Dibuat dengan ❤️ oleh Nanda Awaludin.</p>
+      <div class="card">
+        <h4>Share</h4>
+        <p class="muted" style="margin:6px 0">Bagikan link halaman ini ke teman-teman KPN KOTEK agar mereka juga bisa melihat kenangan.</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn" onclick="copyLink()">Copy Link</button>
+          <button class="btn" onclick="downloadGuestbook()">Export Pesan</button>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 KPN KOTEK — dibuat oleh Nanda Verstappen • Simpan kenangan, jaga persahabatan.
   </footer>
 
+  <!-- image modal -->
+  <div class="modal" id="imgModal" onclick="closeZoom(event)">
+    <img id="imgZoom" src="" alt="zoom">
+  </div>
+
+  <!-- Music control bar (bottom) -->
+  <div class="music-control" role="region" aria-label="Music control">
+    <div class="music-left">
+      <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+      <div style="min-width:140px">
+        <div style="font-weight:800" id="mc-title">KPN KOTEK — Cuplikan</div>
+        <div style="font-size:12px;color:var(--muted)" id="mc-artist">Teman — Iwan Fals (potongan)</div>
+      </div>
+    </div>
+
+    <div class="progress" style="margin:0 12px">
+      <div class="bar" onclick="seek(event)" id="progressBar"><i id="progressFill"></i></div>
+      <div class="time"><span id="timeCurrent">0:00</span><span id="timeTotal">0:00</span></div>
+    </div>
+
+    <div class="vol">
+      <label class="muted" style="font-size:13px">Vol</label>
+      <input type="range" id="volume" min="0" max="1" step="0.01" value="0.85" />
+    </div>
+  </div>
+
+  <!-- audio element (use the exact filename you uploaded to repo) -->
+  <!-- IMPORTANT: upload SnapTik.Net_7276378260064242949.mp3 to the same repo/folder as index.html -->
+  <audio id="audio" preload="metadata">
+    <source src="SnapTik.Net_7276378260064242949.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // --- Helper navigation ---
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // --- Image zoom modal ---
+    function zoom(img){
+      const modal = document.getElementById('imgModal');
+      const imgZoom = document.getElementById('imgZoom');
+      imgZoom.src = img.src;
+      modal.style.display = 'flex';
+    }
+    function closeZoom(e){
+      // close only when clicking on overlay
+      if(e.target.id === 'imgModal') document.getElementById('imgModal').style.display='none';
+    }
+
+    // --- Profile story ---
+    const profiles = {
+      PALEN: {
+        avatar: 'P',
+        name: 'PALEN',
+        role: 'Si humoris & hangout planner',
+        text: 'Palen selalu jadi sumber tawa. Ingat waktu Palen memimpin "operasi jajan" itu? Legendaris!'
+      },
+      KEPET: {
+        avatar: 'K',
+        name: 'KEPET',
+        role: 'King of jokes & logistics',
+        text: 'Kepet selalu siap sedia. Kalau ada reuni, urusan transport pasti beres karena Kepet.'
+      },
+      NANDUT: {
+        avatar: 'N',
+        name: 'NANDUT',
+        role: 'Kolektor meme & kreator',
+        text: 'Nandut rajin simpan momen-momen lucu dan kadang ngedit video yang bikin kita ngakak.'
+      }
+    };
+
+    function openProfile(id){
+      const p = profiles[id];
+      if(!p) return;
+      document.getElementById('profile-avatar').textContent = p.avatar;
+      document.getElementById('profile-name').textContent = p.name;
+      document.getElementById('profile-role').textContent = p.role;
+      document.getElementById('profile-text').textContent = p.text;
+      const sec = document.getElementById('story');
+      sec.style.display = 'block';
+      sec.setAttribute('aria-hidden','false');
+      sec.scrollIntoView({behavior:'smooth'});
+    }
+    function closeProfile(){
+      const sec = document.getElementById('story');
+      sec.style.display = 'none';
+      sec.setAttribute('aria-hidden','true');
+    }
+
+    // --- Guestbook (localStorage) ---
+    const guestKey = 'kpn_kotek_guestbook_v1';
+    function getGuests(){
+      try{
+        const raw = localStorage.getItem(guestKey);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){ return []; }
+    }
+    function saveGuests(list){
+      localStorage.setItem(guestKey, JSON.stringify(list));
+    }
+    function renderGuests(){
+      const list = getGuests();
+      const container = document.getElementById('guestList');
+      container.innerHTML = '';
+      if(list.length === 0){
+        container.innerHTML = '<div class="muted">Belum ada pesan. Jadilah yang pertama!</div>';
+        return;
+      }
+      list.slice().reverse().forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'guest-item';
+        el.innerHTML = '<strong>'+escapeHtml(item.name)+'</strong> <small class="muted">• '+new Date(item.time).toLocaleString()+'</small><p style="margin:8px 0 0">'+escapeHtml(item.message)+'</p>';
+        container.appendChild(el);
+      });
+    }
+    function addGuest(){
+      const name = document.getElementById('gname').value.trim();
+      const msg = document.getElementById('gmsg').value.trim();
+      if(!name || !msg) return false;
+      const list = getGuests();
+      list.push({name, message: msg, time: Date.now()});
+      saveGuests(list);
+      document.getElementById('gname').value = '';
+      document.getElementById('gmsg').value = '';
+      renderGuests();
+      return false;
+    }
+    function clearGuest(){
+      if(!confirm('Hapus semua pesan di guestbook? Tindakan ini tidak bisa dibatalkan.')) return;
+      localStorage.removeItem(guestKey);
+      renderGuests();
+    }
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function (m) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]);
+      });
+    }
+    renderGuests();
+
+    // --- Export/Copy helpers ---
+    function copyLink(){
+      const link = location.href;
+      navigator.clipboard?.writeText(link).then(()=> alert('Link disalin! Bagikan ke teman-teman KPN KOTEK.'));
+    }
+    function downloadGuestbook(){
+      const list = getGuests();
+      const blob = new Blob([JSON.stringify(list, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'kpn_kotek_guestbook.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // --- Audio player logic ---
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const playBtnTop = document.getElementById('playBtnTop');
+    const progressFill = document.getElementById('progressFill');
+    const timeCurrent = document.getElementById('timeCurrent');
+    const timeTotal = document.getElementById('timeTotal');
+    const volume = document.getElementById('volume');
+    const mcTitle = document.getElementById('mc-title');
+    const mcArtist = document.getElementById('mc-artist');
+    const trackStatus = document.getElementById('trackStatus');
+
+    // initialize
+    audio.volume = parseFloat(volume.value);
+    // update time total when metadata loaded
+    audio.addEventListener('loadedmetadata', ()=> {
+      timeTotal.textContent = formatTime(audio.duration);
+      mcTitle.textContent = mcTitle.textContent || audio.currentSrc.split('/').pop();
+    });
+
+    audio.addEventListener('timeupdate', ()=> {
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = (isFinite(pct) ? pct : 0) + '%';
+      timeCurrent.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', ()=> {
+      // for cuplikan, don't loop by default — keep stopped
+      updatePlayButtons(false);
+      audio.currentTime = 0;
+    });
+
+    volume.addEventListener('input', ()=> {
+      audio.volume = parseFloat(volume.value);
+    });
+
+    function formatTime(sec){
+      if(!isFinite(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    function togglePlay(){
+      if(audio.paused){
+        audio.play().catch(err => {
+          // autoplay or cross-origin restrictions
+          alert('Audio tidak bisa diputar otomatis di peramban ini — tekan tombol play lagi untuk memulai.');
+        });
+        updatePlayButtons(true);
+      } else {
+        audio.pause();
+        updatePlayButtons(false);
+      }
+    }
+    function updatePlayButtons(playing){
+      const symbol = playing ? '❚❚' : '▶';
+      playBtn.textContent = symbol;
+      playBtnTop.textContent = symbol;
+      trackStatus.textContent = playing ? 'Playing' : 'Paused';
+    }
+
+    function seek(e){
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const pct = Math.max(0, Math.min(1, x / rect.width));
+      if(isFinite(audio.duration)) audio.currentTime = pct * audio.duration;
+    }
+
+    // if user navigates from link with hash, smooth scroll
+    if(location.hash) setTimeout(()=> { const el = document.querySelector(location.hash); if(el) el.scrollIntoView({behavior:'smooth'}); }, 200);
+
+    // close modal on Escape
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){
+        const modal = document.getElementById('imgModal');
+        if(modal.style.display === 'flex') modal.style.display = 'none';
+      }
+    });
+
+    // Seed example guest messages if empty (optional)
+    (function seed(){
+      const list = getGuests();
+      if(list.length === 0){
+        const example = [
+          {name:'PALEN',message:'Ingat pas kita nyasar? Gak akan terlupakan!',time:Date.now()-1000*60*60*24*365},
+          {name:'KEPET',message:'KPN KOTEK forever!',time:Date.now()-1000*60*60*24*120},
+          {name:'NANDUT',message:'Ntar kumpul lagi ya, bawa cemilan!',time:Date.now()-1000*60*60*24*30}
+        ];
+        saveGuests(example);
+        renderGuests();
+      }
+    })();
+
+    // Accessibility & small niceties
+    // ensure click on play icons also toggles
+    playBtn.addEventListener('click', ()=>{});
+    playBtnTop.addEventListener('click', ()=>{});
+
+  </script>
 </body>
-      </html>
+</html>
